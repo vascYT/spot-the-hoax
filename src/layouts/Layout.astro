@@ -1,3 +1,8 @@
+---
+import "@fontsource-variable/noto-sans";
+import Navbar from "../components/Navbar.astro";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,7 +11,8 @@
     <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <title>Spot The Hoax</title>
   </head>
-  <body>
+  <body class="flex min-h-screen w-screen text-white bg-black">
+    <Navbar />
     <slot />
   </body>
 </html>

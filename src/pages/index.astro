@@ -1,5 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Feed from "../components/Feed";
 ---
 
-<Layout />
+<Layout>
+  <Feed client:load />
+</Layout>

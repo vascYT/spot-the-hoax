@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import { House, Info } from "lucide-react";
+import logo from "../assets/logo-white.png";
+
+const items = [
+  { name: "Home", url: "", icon: House },
+  { name: "About", url: "", icon: Info },
+];
+---
+
+<div class="w-1/6 h-screen border-r border-white/20 px-3 sticky top-0">
+  <Image src={logo} alt="Spot The Hoax Logo" class="mt-9 my-10 pl-3 pr-16" />
+  <div>
+    {
+      items.map((item) => (
+        <a
+          href={item.url}
+          class="flex items-center gap-4 py-3 px-4 rounded-md mb-4 hover:bg-white/20"
+        >
+          <item.icon />
+          <p>{item.name}</p>
+        </a>
+      ))
+    }
+  </div>
+</div>
