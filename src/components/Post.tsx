@@ -13,11 +13,11 @@ export default function Post({ post }: { post: (typeof posts)[0] }) {
       </div>
       <img src={post.image} />
       <div className="mb-4">
-        <div className="flex items-center mt-5 mb-3 gap-5">
-          <Heart className="size-[5%]" />
-          <MessageCircle className="size-[5%]" />
-          <Send className="size-[5%]" />
-          <Bookmark className="size-[5%] ml-auto" />
+        <div className="flex items-center my-3 gap-3">
+          <Heart className="size-[4%]" />
+          <MessageCircle className="size-[4%]" />
+          <Send className="size-[4%]" />
+          <Bookmark className="size-[4%] ml-auto" />
         </div>
         <p className="font-bold mb-1">{post.likes.toLocaleString()} likes</p>
         <div>
