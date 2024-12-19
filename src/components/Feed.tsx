@@ -1,29 +1,24 @@
+import { useEffect } from "react";
 import posts from "../assets/posts.json";
+import { useGameStore } from "../hooks/useGameStore";
 import Post from "./Post";
-
-function shuffle(array: any[]) {
-  let currentIndex = array.length;
-
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-}
+import { shuffle } from "../lib/utils";
 
 export default function Feed() {
-  shuffle(posts);
+  const gameState = useGameStore((state) => state.state);
+  const score = useGameStore((state) => state.score);
+
+  useEffect(() => {
+    shuffle(posts);
+  }, [gameState]);
+
+  if (posts.length == 0 || gameState !== "live") {
+    return <div></div>;
+  }
 
   return (
-    <div className="flex items-center flex-col w-full h-full mt-10 px-10">
-      {posts.map((post, i) => (
+    <div className="flex items-center flex-col h-full pt-10 px-10">
+      {posts.slice(0, score + 1).map((post, i) => (
         <Post key={i} post={post} />
       ))}
     </div>

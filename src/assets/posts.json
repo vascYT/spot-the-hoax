@@ -3,6 +3,7 @@
     "caption": "Auf Schiene: Die neue West-Bahnstrecke zwischen Wien und St. Pölten ist ab Sonntag, 15. Dezember, wieder vollständig befahrbar.",
     "image": "https://r2.vasc.dev/images/C0oVB.jpeg",
     "likes": 8054,
+    "hoax": true,
     "author": {
       "username": "zeitimbild",
       "verified": true,
@@ -13,6 +14,7 @@
     "caption": "Fit und clever: Je sportlicher, desto besser die Gehirnleistung - das zeigt eine aktuelle Studie.",
     "image": "https://r2.vasc.dev/images/M0EVb.jpeg",
     "likes": 28650,
+    "hoax": false,
     "author": {
       "username": "zeitimbild",
       "verified": true,

@@ -1,8 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Feed from "../components/Feed";
+import Score from "../components/Score";
 ---
 
 <Layout>
-  <Feed client:load />
+  <div class="flex justify-center w-full">
+    <Feed client:load />
+    <Score client:load />
+  </div>
 </Layout>
