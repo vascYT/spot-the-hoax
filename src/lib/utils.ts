@@ -5,7 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function shuffle(array: any[]) {
+export function shuffle(originalArray: any[]) {
+  let array = originalArray.slice(0);
   let currentIndex = array.length;
 
   while (currentIndex != 0) {
@@ -17,4 +18,6 @@ export function shuffle(array: any[]) {
       array[currentIndex],
     ];
   }
+
+  return array;
 }
