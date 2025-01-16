@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { useGameStore } from "../hooks/useGameStore";
 import Post from "./Post";
 
 export default function Feed() {
   const posts = useGameStore((state) => state.posts);
+  const fetchPosts = useGameStore((state) => state.fetchPosts);
   const gameState = useGameStore((state) => state.state);
   const score = useGameStore((state) => state.score);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   if (posts.length == 0 || gameState !== "live") {
     return <div></div>;

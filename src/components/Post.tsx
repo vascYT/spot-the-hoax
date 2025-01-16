@@ -1,10 +1,9 @@
-import posts from "../assets/posts.json";
 import { BadgeCheck, Flag, Heart, MessageCircle, Send } from "lucide-react";
-import { useGameStore } from "../hooks/useGameStore";
+import { useGameStore, type Post } from "../hooks/useGameStore";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "../lib/utils";
 
-export default function Post({ post }: { post: (typeof posts)[0] }) {
+export default function Post({ post }: { post: Post }) {
   const incrementScore = useGameStore((state) => state.incrementScore);
   const gameOver = useGameStore((state) => state.gameOver);
   const [pressed, setPressed] = useState<"like" | "report" | null>(null);
@@ -39,13 +38,23 @@ export default function Post({ post }: { post: (typeof posts)[0] }) {
   return (
     <div ref={postRef} className="max-w-xl border-b border-white/20 mb-10">
       <div className="flex items-center space-x-2 my-3">
-        <img src={post.author.avatar} className="size-8 rounded-full" />
-        <p className="font-bold text-sm">{post.author.username}</p>
-        {post.author.verified && (
+        <img
+          alt="Avatar"
+          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${
+            post.author_avatar
+          }?key=avatar`}
+          className="size-8 rounded-full"
+        />
+        <p className="font-bold text-sm">{post.author_name}</p>
+        {post.author_verified && (
           <BadgeCheck className="size-4 stroke-blue-600" />
         )}
       </div>
-      <img src={post.image} />
+      <img
+        alt="Post"
+        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${post.image}`}
+        className="w-full"
+      />
       <div className="mb-4">
         <div className="flex items-center my-3 gap-3">
           <Heart
@@ -68,8 +77,8 @@ export default function Post({ post }: { post: (typeof posts)[0] }) {
         <p className="font-bold mb-1">{post.likes.toLocaleString()} likes</p>
         <div>
           <div className="flex items-center space-x-1 mb-1 text-sm">
-            <p className="font-bold">{post.author.username}</p>
-            {post.author.verified && (
+            <p className="font-bold">{post.author_name}</p>
+            {post.author_verified && (
               <BadgeCheck className="size-4 stroke-blue-600 shrink-0" />
             )}
             <p className="text-ellipsis overflow-hidden whitespace-nowrap">

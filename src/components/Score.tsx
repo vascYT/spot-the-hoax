@@ -2,6 +2,7 @@ import { useGameStore } from "../hooks/useGameStore";
 import { Heart, Flag } from "lucide-react";
 
 export default function Score() {
+  const posts = useGameStore((state) => state.posts);
   const score = useGameStore((state) => state.score);
   const highScore = useGameStore((state) => state.highScore);
   const gameState = useGameStore((state) => state.state);
@@ -60,8 +61,9 @@ export default function Score() {
           <button
             className="px-4 py-2 bg-white text-black rounded-md mt-5"
             onClick={() => restartGame()}
+            disabled={posts.length <= 0}
           >
-            Let's begin
+            {posts.length <= 0 ? "Loading..." : "Let's begin"}
           </button>
         </div>
       )}

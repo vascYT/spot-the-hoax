@@ -1,13 +1,25 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { shuffle } from "../lib/utils";
-import posts from "../assets/posts.json";
+
+export interface Post {
+  id: number;
+  date_created: string;
+  image: string;
+  caption: string;
+  likes: number;
+  hoax: boolean;
+  author_name: string;
+  author_avatar: string;
+  author_verified: boolean;
+}
 
 interface GameState {
   state: "live" | "over" | null;
   score: number;
   highScore: number;
-  posts: typeof posts;
+  posts: Post[];
+  fetchPosts: () => Promise<void>;
   incrementScore: () => void;
   gameOver: () => void;
   restartGame: () => void;
@@ -19,7 +31,14 @@ export const useGameStore = create<GameState>()(
       state: null,
       score: 0,
       highScore: 0,
-      posts: shuffle(posts),
+      posts: [],
+      fetchPosts: async () => {
+        const res = await fetch(
+          `${import.meta.env.PUBLIC_DIRECTUS_URL}/items/fake_news_posts`
+        );
+        const json = await res.json();
+        set({ posts: shuffle(json.data) });
+      },
       incrementScore: () => set({ score: get().score + 1 }),
       gameOver: () =>
         set({
@@ -31,7 +50,7 @@ export const useGameStore = create<GameState>()(
         set({
           state: "live",
           score: 0,
-          posts: shuffle(posts),
+          posts: shuffle(get().posts),
         }),
     }),
     {
