@@ -8,6 +8,9 @@ export default function Post({ post }: { post: Post }) {
   const gameOver = useGameStore((state) => state.gameOver);
   const [pressed, setPressed] = useState<"like" | "report" | null>(null);
   const postRef = useRef<HTMLDivElement | null>(null);
+  const [likes, setLikes] = useState(
+    Math.floor(Math.random() * (100000 - 5000) + 5000)
+  );
   const [showFullDesc, setShowFullDesc] = useState(false);
 
   const like = () => {
@@ -17,6 +20,7 @@ export default function Post({ post }: { post: Post }) {
       gameOver();
     } else {
       incrementScore();
+      setLikes((state) => state + 1);
       setPressed("like");
     }
   };
@@ -87,7 +91,7 @@ export default function Post({ post }: { post: Post }) {
             )}
           />
         </div>
-        <p className="font-bold mb-1">{post.likes.toLocaleString()} likes</p>
+        <p className="font-bold mb-1">{likes.toLocaleString()} likes</p>
         <div>
           <div className="flex space-x-1 mb-1 text-sm">
             <p className="font-bold">{post.author_name}</p>

@@ -8,7 +8,6 @@ export interface Post {
   image: string;
   headline: string;
   caption: string;
-  likes: number;
   theme_color: string;
   hoax: boolean;
   author_name: string;
