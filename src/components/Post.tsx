@@ -52,7 +52,9 @@ export default function Post({ post }: { post: Post }) {
       </div>
       <img
         alt="Post"
-        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${post.image}`}
+        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${
+          post.image
+        }?key=post`}
         className="w-full"
       />
       <div className="mb-4">
