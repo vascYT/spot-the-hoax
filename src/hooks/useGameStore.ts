@@ -6,8 +6,10 @@ export interface Post {
   id: number;
   date_created: string;
   image: string;
+  headline: string;
   caption: string;
   likes: number;
+  theme_color: string;
   hoax: boolean;
   author_name: string;
   author_avatar: string;

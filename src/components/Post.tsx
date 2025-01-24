@@ -8,6 +8,7 @@ export default function Post({ post }: { post: Post }) {
   const gameOver = useGameStore((state) => state.gameOver);
   const [pressed, setPressed] = useState<"like" | "report" | null>(null);
   const postRef = useRef<HTMLDivElement | null>(null);
+  const [showFullDesc, setShowFullDesc] = useState(false);
 
   const like = () => {
     if (pressed != null) return;
@@ -50,13 +51,23 @@ export default function Post({ post }: { post: Post }) {
           <BadgeCheck className="size-4 stroke-blue-600" />
         )}
       </div>
-      <img
-        alt="Post"
-        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${
-          post.image
-        }?key=post`}
-        className="w-full"
-      />
+      <div
+        className="relative aspect-square bg-cover pointer-events-none"
+        style={{
+          backgroundImage: `url("${
+            import.meta.env.PUBLIC_DIRECTUS_URL
+          }/assets/${post.image}?key=post")`,
+        }}
+      >
+        <div className="absolute bottom-5 left-0">
+          <span
+            className="font-black text-3xl shrink text-white leading-relaxed px-2 box-decoration-clone"
+            style={{ backgroundColor: post.theme_color }}
+          >
+            {post.headline}
+          </span>
+        </div>
+      </div>
       <div className="mb-4">
         <div className="flex items-center my-3 gap-3">
           <Heart
@@ -78,17 +89,27 @@ export default function Post({ post }: { post: Post }) {
         </div>
         <p className="font-bold mb-1">{post.likes.toLocaleString()} likes</p>
         <div>
-          <div className="flex items-center space-x-1 mb-1 text-sm">
+          <div className="flex space-x-1 mb-1 text-sm">
             <p className="font-bold">{post.author_name}</p>
             {post.author_verified && (
               <BadgeCheck className="size-4 stroke-blue-600 shrink-0" />
             )}
-            <p className="text-ellipsis overflow-hidden whitespace-nowrap">
+            <p
+              className={cn(
+                "text-ellipsis overflow-hidden",
+                !showFullDesc ? "whitespace-nowrap" : undefined
+              )}
+            >
               {post.caption}
             </p>
           </div>
+          <button
+            onClick={() => setShowFullDesc((state) => !state)}
+            className="text-gray-400"
+          >
+            {showFullDesc ? "Show less" : "Show more"}
+          </button>
         </div>
-        <p className="text-gray-400">View Comments</p>
       </div>
     </div>
   );
