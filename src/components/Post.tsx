@@ -50,7 +50,10 @@ export default function Post({ post }: { post: Post }) {
   }, [postRef]);
 
   return (
-    <div ref={postRef} className="max-w-xl border-b border-white/20 mb-10">
+    <div
+      ref={postRef}
+      className="max-w-full md:max-w-xl border-b border-white/20 mb-10"
+    >
       <div className="flex items-center space-x-2 my-3">
         <img
           alt="Avatar"

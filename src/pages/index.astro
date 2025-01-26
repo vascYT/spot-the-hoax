@@ -1,12 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Feed from "../components/Feed";
-import Score from "../components/Score";
+import Game from "../components/Game";
 ---
 
 <Layout>
-  <div class="flex justify-center w-full">
-    <Feed client:only />
-    <Score client:only />
-  </div>
+  <Game client:only />
 </Layout>
