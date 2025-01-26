@@ -13,6 +13,7 @@ export interface Post {
   author_name: string;
   author_avatar: string;
   author_verified: boolean;
+  source: string | null;
 }
 
 interface GameState {

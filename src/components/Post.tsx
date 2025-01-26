@@ -1,4 +1,12 @@
-import { BadgeCheck, Flag, Heart, MessageCircle, Send } from "lucide-react";
+import {
+  BadgeCheck,
+  CheckCircle2,
+  Flag,
+  Heart,
+  MessageCircle,
+  Send,
+  X,
+} from "lucide-react";
 import { useGameStore, type Post } from "../hooks/useGameStore";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "../lib/utils";
@@ -6,6 +14,7 @@ import { cn } from "../lib/utils";
 export default function Post({ post }: { post: Post }) {
   const incrementScore = useGameStore((state) => state.incrementScore);
   const gameOver = useGameStore((state) => state.gameOver);
+  const gameState = useGameStore((state) => state.state);
   const [pressed, setPressed] = useState<"like" | "report" | null>(null);
   const postRef = useRef<HTMLDivElement | null>(null);
   const [likes, setLikes] = useState(
@@ -15,22 +24,22 @@ export default function Post({ post }: { post: Post }) {
 
   const like = () => {
     if (pressed != null) return;
+    setPressed("like");
+    setLikes((state) => state + 1);
 
     if (post.hoax) {
       gameOver();
     } else {
       incrementScore();
-      setLikes((state) => state + 1);
-      setPressed("like");
     }
   };
 
   const report = () => {
     if (pressed != null) return;
+    setPressed("report");
 
     if (post.hoax) {
       incrementScore();
-      setPressed("report");
     } else {
       gameOver();
     }
@@ -101,7 +110,7 @@ export default function Post({ post }: { post: Post }) {
             <p
               className={cn(
                 "text-ellipsis overflow-hidden",
-                !showFullDesc ? "whitespace-nowrap" : undefined
+                !showFullDesc && "whitespace-nowrap"
               )}
             >
               {post.caption}
@@ -115,6 +124,35 @@ export default function Post({ post }: { post: Post }) {
           </button>
         </div>
       </div>
+      {gameState === "over" && (
+        <div
+          className={cn(
+            post.hoax ? "bg-red-400/25" : "bg-green-400/25",
+            "flex items-center gap-2 py-3 px-2 my-2 rounded-md"
+          )}
+        >
+          {post.hoax ? (
+            <>
+              <X className="size-5" />
+              <p>This post is based on fabricated information.</p>
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="size-5" />
+              <p>This post is based on real information.</p>
+              {post.source && (
+                <a
+                  href={post.source}
+                  target="_blank"
+                  className="underline underline-offset-4 text-sm"
+                >
+                  Source
+                </a>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }

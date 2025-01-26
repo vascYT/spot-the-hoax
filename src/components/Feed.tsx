@@ -12,14 +12,14 @@ export default function Feed() {
     fetchPosts();
   }, []);
 
-  if (posts.length == 0 || gameState !== "live") {
+  if (posts.length == 0 || !gameState) {
     return <div></div>;
   }
 
   return (
     <div className="flex items-center flex-col h-full pt-10 px-10">
-      {posts.slice(0, score + 1).map((post, i) => (
-        <Post key={i} post={post} />
+      {posts.slice(0, score + 1).map((post) => (
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );
