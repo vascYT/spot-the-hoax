@@ -7,13 +7,17 @@ import {
   Send,
   X,
 } from "lucide-react";
-import { useGameStore, type Post } from "../hooks/useGameStore";
+import useSound from "use-sound";
 import { useEffect, useRef, useState } from "react";
+import { useGameStore, type Post } from "../hooks/useGameStore";
 import { cn } from "../lib/utils";
+import correctSfx from "../assets/sfx/correct.mp3";
+import wrongSfx from "../assets/sfx/wrong.mp3";
 
 export default function Post({ post }: { post: Post }) {
   const incrementScore = useGameStore((state) => state.incrementScore);
   const gameOver = useGameStore((state) => state.gameOver);
+  const sfxEnabled = useGameStore((state) => state.sfx);
   const gameState = useGameStore((state) => state.state);
   const [pressed, setPressed] = useState<"like" | "report" | null>(null);
   const postRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +25,14 @@ export default function Post({ post }: { post: Post }) {
     Math.floor(Math.random() * (100000 - 5000) + 5000)
   );
   const [showFullDesc, setShowFullDesc] = useState(false);
+  const [playCorrect] = useSound(correctSfx, {
+    volume: 0.25,
+    soundEnabled: sfxEnabled,
+  });
+  const [playWrong] = useSound(wrongSfx, {
+    volume: 0.25,
+    soundEnabled: sfxEnabled,
+  });
 
   const like = () => {
     if (pressed != null) return;
@@ -29,8 +41,10 @@ export default function Post({ post }: { post: Post }) {
 
     if (post.hoax) {
       gameOver();
+      playWrong();
     } else {
       incrementScore();
+      playCorrect();
     }
   };
 
@@ -40,8 +54,10 @@ export default function Post({ post }: { post: Post }) {
 
     if (post.hoax) {
       incrementScore();
+      playCorrect();
     } else {
       gameOver();
+      playWrong();
     }
   };
 

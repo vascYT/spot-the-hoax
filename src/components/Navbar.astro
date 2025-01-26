@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { House, Info } from "lucide-react";
 import logo from "../assets/logo-white.png";
+import SfxButton from "./SfxButton";
 
 const items = [
   { name: "Home", url: "/", icon: House },
@@ -10,14 +11,16 @@ const items = [
 ---
 
 <div
-  class="sticky z-10 bottom-0 w-full bg-black/20 backdrop-blur-md border-white/20 px-3 border-t shrink-0 xl:w-1/6 xl:h-screen xl:border-t-0 xl:border-r xl:top-0"
+  class="flex flex-col sticky z-10 bottom-0 w-full bg-black/20 backdrop-blur-md border-white/20 px-3 border-t shrink-0 xl:w-1/6 xl:h-screen xl:border-t-0 xl:border-r xl:top-0"
 >
   <Image
     src={logo}
     alt="Spot The Hoax Logo"
     class="hidden xl:block my-10 lg:px-3 w-48"
   />
-  <div class="flex items-center justify-center xl:flex-col xl:items-start">
+  <div
+    class="flex items-center justify-center xl:justify-start xl:flex-col xl:items-start grow"
+  >
     {
       items.map((item) => (
         <a
@@ -29,5 +32,8 @@ const items = [
         </a>
       ))
     }
+    <div class="mt-auto justify-self-end">
+      <SfxButton client:load />
+    </div>
   </div>
 </div>

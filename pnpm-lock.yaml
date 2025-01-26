@@ -47,6 +47,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.16
         version: 3.4.16
+      use-sound:
+        specifier: ^4.0.3
+        version: 4.0.3(react@19.0.0)
       zustand:
         specifier: ^5.0.2
         version: 5.0.2(@types/react@19.0.1)(react@19.0.0)
@@ -1165,6 +1168,9 @@ packages:
   hastscript@9.0.0:
     resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
 
+  howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
+
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
@@ -1875,6 +1881,11 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
+
+  use-sound@4.0.3:
+    resolution: {integrity: sha512-L205pEUFIrLsGYsCUKHQVCt0ajs//YQOFbEQeNwaWaqQj3y3st4SuR+rvpMHLmv8hgTcfUFlvMQawZNI3OE18w==}
+    peerDependencies:
+      react: '>=16.8'
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -3154,6 +3165,8 @@ snapshots:
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
 
+  howler@2.2.4: {}
+
   html-escaper@3.0.3: {}
 
   html-void-elements@3.0.0: {}
@@ -4117,6 +4130,11 @@ snapshots:
       browserslist: 4.24.2
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  use-sound@4.0.3(react@19.0.0):
+    dependencies:
+      howler: 2.2.4
+      react: 19.0.0
 
   util-deprecate@1.0.2: {}
 
