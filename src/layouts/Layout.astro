@@ -3,6 +3,7 @@ import "@fontsource-variable/noto-sans";
 import Navbar from "../components/Navbar.astro";
 
 const { title } = Astro.props;
+const { PUBLIC_PLAUSIBLE_DOMAIN, PUBLIC_PLAUSIBLE_URL } = import.meta.env;
 ---
 
 <!doctype html>
@@ -11,6 +12,15 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    {
+      PUBLIC_PLAUSIBLE_DOMAIN && PUBLIC_PLAUSIBLE_URL && (
+        <script
+          defer
+          data-domain={PUBLIC_PLAUSIBLE_DOMAIN}
+          src={`${PUBLIC_PLAUSIBLE_URL}/js/script.outbound-links.js`}
+        />
+      )
+    }
     <title>
       {title ? `${title} • Spot The Hoax` : "Spot The Hoax"}
     </title>
