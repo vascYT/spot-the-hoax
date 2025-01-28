@@ -65,6 +65,13 @@ export default function Post({ post }: { post: Post }) {
     postRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [postRef]);
 
+  useEffect(() => {
+    // Reset buttons when game restarts
+    if (gameState === "live") {
+      setPressed(null);
+    }
+  }, [gameState]);
+
   return (
     <div
       ref={postRef}
