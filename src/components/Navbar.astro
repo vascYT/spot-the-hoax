@@ -32,8 +32,11 @@ const items = [
         </a>
       ))
     }
-    <div class="mt-auto justify-self-end">
+    <div
+      class="xl:flex items-center justify-between xl:w-full gap-2 mt-auto justify-self-end"
+    >
       <SfxButton client:load />
+      <p class="hidden xl:block text-sm text-gray-300">v{__APP_VERSION__}</p>
     </div>
   </div>
 </div>

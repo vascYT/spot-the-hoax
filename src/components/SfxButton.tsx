@@ -6,7 +6,7 @@ export default function SfxButton() {
   const toggleSfx = useGameStore((state) => state.toggleSfx);
 
   return (
-    <button className="py-3 px-4" onClick={() => toggleSfx()}>
+    <button className="py-3" onClick={() => toggleSfx()}>
       {sfxEnabled ? <Volume2Icon /> : <VolumeOff />}
     </button>
   );
