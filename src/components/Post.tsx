@@ -80,9 +80,9 @@ export default function Post({ post }: { post: Post }) {
       <div className="flex items-center space-x-2 my-3">
         <img
           alt="Avatar"
-          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${
+          src={`${import.meta.env.PUBLIC_STORAGE_URL}/avatars/${
             post.author_avatar
-          }?key=avatar`}
+          }.jpg`}
           className="size-8 rounded-full"
         />
         <p className="font-bold text-sm">{post.author_name}</p>
@@ -93,9 +93,9 @@ export default function Post({ post }: { post: Post }) {
       <div
         className="relative aspect-square bg-cover pointer-events-none"
         style={{
-          backgroundImage: `url("${
-            import.meta.env.PUBLIC_DIRECTUS_URL
-          }/assets/${post.image}?key=post")`,
+          backgroundImage: `url("${import.meta.env.PUBLIC_STORAGE_URL}/images/${
+            post.image
+          }.jpg")`,
         }}
       >
         <div className="absolute bottom-5 left-0">

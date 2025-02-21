@@ -39,10 +39,10 @@ export const useGameStore = create<GameState>()(
       sfx: true,
       fetchPosts: async () => {
         const res = await fetch(
-          `${import.meta.env.PUBLIC_DIRECTUS_URL}/items/fake_news_posts`
+          `${import.meta.env.PUBLIC_STORAGE_URL}/posts.json`
         );
         const json = await res.json();
-        set({ posts: shuffle(json.data) });
+        set({ posts: shuffle(json) });
       },
       incrementScore: () => set({ score: get().score + 1 }),
       gameOver: () =>
